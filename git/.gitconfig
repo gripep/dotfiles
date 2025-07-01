@@ -1,0 +1,104 @@
+# Global git configuration file
+
+# List of git configuration variables
+# Docs:
+# 	https://git-scm.com/docs/git-config#_variables
+# Command:
+# 	git help --config
+
+[advice]
+	statusHints = false
+
+# Currently using Oh My Zsh git plugin
+# [alias]
+# 	# ...
+
+[branch]
+	sort = -committerdate
+
+[column]
+	ui = auto
+
+[commit]
+	# TODO
+	# gpgSign = true
+	verbose = true
+
+[core]
+	filemode = false
+	autocrlf = input
+	excludesfile = ~/.gitignore_global
+	editor = code --wait
+	pager = delta
+	whitespace = error
+
+[credential]
+	# Function to select the appropriate credential helper based on the OS
+	helper = "!f() { if [ \"$(uname -s)\" = Linux ]; then cache --timeout 3600 \"$@\"; else osxkeychain \"$@\"; fi; };f"
+
+[diff]
+	trustExitCode = true
+	mnemonicPrefix = true
+	renames = copies
+	algorithm = histogram
+	colorMoved = plain
+
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
+
+[grep]
+	linenumber = true
+
+[help]
+	autocorrect = prompt
+
+[init]
+	defaultBranch = main
+
+[interactive]
+	diffFilter = delta --color-only
+
+[merge]
+	conflictstyle = diff3
+
+[pull]
+	rebase = true
+
+[push]
+	autoSetupRemote = true
+	default = current
+	followTags = true
+
+[rebase]
+	autoSquash = true
+	autoStash = true
+	updateRefs = true
+
+[rerere]
+	autoupdate = true
+	enabled = true
+
+[status]
+	branch = true
+	showStash = true
+	showUntrackedFiles = all
+
+[tag]
+	sort = -taggerdate
+
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
+
+[user]
+	name = Gian
+	email = 30044863+gripep@users.noreply.github.com
+	# TODO
+	# It is safe to share the signing key
+	# https://security.stackexchange.com/a/153582
+	# signingkey = <signingkey>
+
+# TODO: Include on work machine with [user] section and company email (if required)
+# [includeIf "gitdir:~/<company-name>/"]
+#     path = ~/Developer/opt/<company-name>/.gitconfig

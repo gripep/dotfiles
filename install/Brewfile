@@ -1,0 +1,41 @@
+# This Brewfile is used to install all the necessary packages, tools and apps
+
+# You can generate a Brewfile using the command:
+#   brew bundle dump
+# You can install all the packages listed in the Brewfile using the command:
+#   brew bundle --file Brewfile
+
+tap "ngrok/ngrok"
+
+brew "mas"  # Mac App Store command line interface
+brew "mkcert"  # Simple tool to make locally trusted development certificates
+brew "pkgconf"  # Package compiler and linker metadata toolkit
+brew "poetry" # Python dependency management and packaging tool
+brew "postgresql@15"
+brew "pyenv"  # Python version management
+brew "tox"  # Generic Python virtualenv management and test command-line tool
+brew "tree"
+
+cask "android-studio"
+cask "appcleaner"
+cask "canva"
+cask "discord"
+cask "docker"
+cask "expressvpn"
+cask "firefox"
+cask "google-drive"
+cask "google-chrome"
+cask "iterm2"
+cask "notion"
+cask "ngrok"
+cask "postman"
+cask "slack"
+cask "spotify"
+cask "telegram-desktop"
+cask "visual-studio-code"
+cask "vlc"
+cask "whatsapp"
+cask "zoom"
+
+mas "Magnet", id: 441258766
+mas "Todoist", id: 585829637

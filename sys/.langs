@@ -1,0 +1,35 @@
+# Languages and tools environment variables for Zsh
+
+###############################################################################
+# Flutter                                                                     #
+###############################################################################
+
+export PATH="$PATH:$HOME/Developer/opt/flutter/bin"
+
+# flutterfire CLI
+export PATH="$PATH:$HOME/.pub-cache/bin"
+
+###############################################################################
+# Go                                                                          #
+###############################################################################
+
+export GOPATH="$HOME/Developer/opt/go"
+PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
+
+###############################################################################
+# Python                                                                      #
+###############################################################################
+
+# pyenv
+PYENV_ROOT="$HOME/.pyenv" # Path to pyenv root
+export PATH="$PYENV_ROOT/shims:$PATH" # Path to pyenv shims
+eval "$(pyenv init -)" # Initialize pyenv
+
+# tox
+export PATH="$PATH:$HOME/.local/bin"
+
+###############################################################################
+# Rust                                                                        #
+###############################################################################
+
+export PATH="$HOME/.cargo/bin:$PATH"

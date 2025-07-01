@@ -1,0 +1,21 @@
+# Global .gitignore file for all repositories
+
+### Misc ###
+._*
+.DS_Store
+
+### IDEs ###
+.idea/
+.vscode/
+
+### Python ###
+__pycache__/
+
+### Node ###
+node_modules/
+npm-debug.log
+
+### Logs and databases ###
+*.log
+*.sql
+*.sqlite

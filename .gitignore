@@ -1,0 +1,10 @@
+### Misc ###
+._*
+.DS_Store
+
+### IDEs ###
+.idea/
+.vscode/
+
+### environment ###
+.env

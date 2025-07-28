@@ -25,6 +25,8 @@ OMZ_CUSTOM_DIR="$ZSH_DIR/.oh-my-zsh/custom"
 echo "Installing Oh My Zsh plugins and theme..."
 # Install zsh-autosuggestions plugin
 git clone https://github.com/zsh-users/zsh-autosuggestions ${OMZ_CUSTOM_DIR:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+# Install zsh-completions plugin
+git clone https://github.com/zsh-users/zsh-completions.git ${OMZ_CUSTOM_DIR:-$HOME/.oh-my-zsh/custom}/plugins/zsh-completions
 # Install zsh-syntax-highlighting plugin
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${OMZ_CUSTOM_DIR:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 

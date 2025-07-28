@@ -29,6 +29,9 @@ source $ZSH/oh-my-zsh.sh
 # Run `p10k configure` to customise
 source $ZSH_DIR/.p10k.zsh
 
+# Apply zsh history settings
+source $ZSH_DIR/.history.zsh
+
 # Source the system dotfiles for alias, path, and other config
 DOTFILES_DIR="$HOME/.dotfiles"
 

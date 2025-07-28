@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+# Set the email address for a single repository
+# Usage: git-set-email [--help|--work|--personal]
+
+# Source:
+# https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-email-preferences/setting-your-commit-email-address#setting-your-email-address-for-a-single-repository
+
+if [ -z "$1" ]; then
+    echo "Usage: $0 [--help|--work|--personal]"
+    exit 1
+fi
+
+# Ensure the MY_EMAIL and WORK_EMAIL variables are set
+if [ -z "$MY_EMAIL" ]; then
+    echo "MY_EMAIL environment variable is not set."
+    exit 1
+elif [ -z "$WORK_EMAIL" ]; then
+    echo "WORK_EMAIL environment variable is not set."
+    exit 1
+fi
+
+# Find the current directory name for context
+# This is only used for output messages
+DIRNAME=$(basename "$(pwd)")
+
+# Set the email address based on the argument
+case "$1" in
+    "--help")
+        echo "Usage: $0 [--help|--work|--personal]"
+        echo "Set the email address for a single repository."
+        exit 0
+        ;;
+    "--work")
+        git config user.email "$WORK_EMAIL"
+        echo "Setting email to $WORK_EMAIL for $DIRNAME"
+        ;;
+    "--personal")
+        git config user.email "$MY_EMAIL"
+        echo "Setting email to $MY_EMAIL for $DIRNAME"
+        ;;
+    *)
+        echo "Usage: $0 [--help|--work|--personal]"
+esac

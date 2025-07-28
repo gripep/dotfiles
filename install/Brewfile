@@ -32,10 +32,10 @@ cask "postman"
 cask "slack"
 cask "spotify"
 cask "telegram-desktop"
+cask "todoist-app"
 cask "visual-studio-code"
 cask "vlc"
 cask "whatsapp"
 cask "zoom"
 
 mas "Magnet", id: 441258766
-mas "Todoist", id: 585829637

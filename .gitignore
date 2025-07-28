@@ -8,3 +8,5 @@
 
 ### environment ###
 .env
+# Config that is custom for a machine
+.custom

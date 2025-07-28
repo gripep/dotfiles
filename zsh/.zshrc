@@ -31,6 +31,6 @@ source $ZSH_DIR/.p10k.zsh
 # Source the system dotfiles for alias, path, and other config
 DOTFILES_DIR="$HOME/.dotfiles"
 
-for DOTFILE in "$DOTFILES_DIR"/sys/.{env,langs,alias}; do
+for DOTFILE in "$DOTFILES_DIR"/sys/.{env,langs,alias,custom}; do
     [ -f "$DOTFILE" ] && source "$DOTFILE"
 done

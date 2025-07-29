@@ -20,8 +20,6 @@
 	ui = auto
 
 [commit]
-	# TODO
-	# gpgSign = true
 	verbose = true
 
 [core]
@@ -94,10 +92,6 @@
 [user]
 	name = Gian
 	email = 30044863+gripep@users.noreply.github.com
-	# TODO
-	# It is safe to share the signing key
-	# https://security.stackexchange.com/a/153582
-	# signingkey = <signingkey>
 
 # TODO: Include on work machine with [user] section and company email (if required)
 # [includeIf "gitdir:~/<company-name>/"]

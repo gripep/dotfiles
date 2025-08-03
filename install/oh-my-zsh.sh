@@ -30,6 +30,11 @@ git clone https://github.com/zsh-users/zsh-completions.git ${OMZ_CUSTOM_DIR:-$HO
 # Install zsh-syntax-highlighting plugin
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${OMZ_CUSTOM_DIR:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
+# Enable tab completion for poetry plugin (python dependency manager)
+# Source: https://python-poetry.org/docs/#oh-my-zsh
+mkdir -p ${OMZ_CUSTOM_DIR:-$HOME/.oh-my-zsh/custom}/plugins/poetry
+poetry completions zsh > ${OMZ_CUSTOM_DIR:-$HOME/.oh-my-zsh/custom}/plugins/poetry/_poetry
+
 # Install  Powerlevel10k theme
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${OMZ_CUSTOM_DIR:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 

@@ -17,6 +17,7 @@ plugins=(
     # fzf-tab
     git
     # git-extras
+    poetry
     # tmux
     # tmuxinator
     zsh-autosuggestions

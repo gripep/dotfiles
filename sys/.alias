@@ -1,7 +1,7 @@
 # Shortcuts
 alias l="ls -la --color"
 
-alias reload="exec zsh"
+alias reload="source $HOME/.zshrc"
 
 # Checks out a branch in all repos in the current directory
 # Usage: gco-rec <branch_name>

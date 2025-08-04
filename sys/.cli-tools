@@ -1,0 +1,8 @@
+# bat
+# Source: https://github.com/sharkdp/bat
+
+# Set the default theme for bat
+# you can list all available themes with the command:
+#   bat --list-themes
+# or use themes compatible with sublime text (.tmTheme files)
+export BAT_THEME="gruvbox-dark"

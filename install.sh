@@ -40,6 +40,8 @@ fi
 ln -sfv "$DOTFILES_DIR/git/.gitconfig" "$HOME"
 ln -sfv "$DOTFILES_DIR/git/.gitignore_global" "$HOME"
 
+ln -svf "$DOTFILES_DIR/iterm2/themes" "$HOME/.config/iterm2/themes"
+
 ln -sfv "$DOTFILES_DIR/zsh/.zshrc" "$HOME"
 ln -sfv "$DOTFILES_DIR/zsh/.history.zsh" "$HOME/.config/zsh/.history.zsh"
 ln -sfv "$DOTFILES_DIR/zsh/.p10k.zsh" "$HOME/.config/zsh/.p10k.zsh"

@@ -69,17 +69,6 @@ KEYID=$(echo "$RESPONSE" |
 
 echo "Public key deployed to remote service."
 
-# Add SSH Key to the local ssh-agent
-echo "Adding SSH key to the ssh-agent..."
-
-eval "$(ssh-agent -s)"
-if is-macos; then
-    ssh-add --apple-use-keychain "${HOME}/.ssh/${PUB_KEY_NAME}"
-else
-    ssh-add "${HOME}/.ssh/${PUB_KEY_NAME}"
-fi
-
-echo "Added SSH key to the ssh-agent."
 
 # Modify SSH config file
 echo "Modifying SSH config for GitHub..."

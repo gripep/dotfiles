@@ -7,6 +7,7 @@
 
 tap "ngrok/ngrok"
 
+brew "awscli" # Official Amazon AWS command-line interface
 brew "bat" # Clone of cat(1) with syntax highlighting and Git integration
 brew "mas"  # Mac App Store command line interface
 brew "mkcert"  # Simple tool to make locally trusted development certificates

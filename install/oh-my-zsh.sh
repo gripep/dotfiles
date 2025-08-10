@@ -8,7 +8,7 @@ ZSH_DIR="$HOME/.config/zsh"
 echo "Installing Oh My Zsh..."
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 # Move the Oh My Zsh installation to the correct directory
-# The sys will make sure to point to the right place and not the default $HOME/.oh-my-zsh
+# The .zshrc will make sure to point to the right place and not the default $HOME/.oh-my-zsh
 mkdir -p $ZSH_DIR
 mv $HOME/.oh-my-zsh $ZSH_DIR/.oh-my-zsh
 # Any previous .zshrc will be renamed to .zshrc.pre-oh-my-zsh

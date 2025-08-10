@@ -25,7 +25,7 @@ source "${DOTFILES_DIR}/system/.env"
 # Generate SSH Key
 echo "Generating SSH key(s)..."
 
-PUB_KEY_NAME="id_rsa"
+PUB_KEY_NAME="id_ed25519"
 
 ssh-keygen -t ed25519 -C "$MY_EMAIL" -f "${HOME}/.ssh/${PUB_KEY_NAME}" -q -N ""
 echo "SSH key generated for personal account with email: ${MY_EMAIL}..."

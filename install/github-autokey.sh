@@ -19,22 +19,37 @@
 
 set -eu -o pipefail
 
+# Source .env file if it exists
+env-activate "${DOTFILES_DIR}/sys/.env"
+
 # Generate SSH Key
 echo "Generating SSH key(s)..."
 
-ssh-keygen -t ed25519 -C "$MY_EMAIL" -f "${HOME}/.ssh/github_rsa"
-if [ ! -z $WORK_EMAIL ]; then
-    WORK_DOMAIN_NAME=$(echo -n "$WORK_EMAIL" | cut -d '@' -f 2 | cut -d '.' -f 1)
-    ssh-keygen -t ed25519 -C "$WORK_EMAIL" -f "${HOME}/.ssh/${WORK_DOMAIN_NAME}_github_rsa"
-fi
+PUB_KEY_NAME="id_rsa"
+
+ssh-keygen -t ed25519 -C "$MY_EMAIL" -f "${HOME}/.ssh/${PUB_KEY_NAME}" -q -N ""
+echo "SSH key generated for personal account with email: ${MY_EMAIL}..."
 
 echo "SSH key(s) generated."
 
 # Deploy the public key to GitHub
 echo "Deploying personal public key to GitHub..."
 
-TITLE=$(hostname)
-PUBKEY=$(cat "${HOME}/.ssh/github_rsa.pub")
+
+if [ -z "${GITHUB_TOKEN}" ]; then
+    echo "GITHUB_TOKEN environment variable is not set. Please set it to your GitHub Fine-grained Token."
+    exit 1
+fi
+
+# Args for the GitHub API request
+if [ "$IS_WORK_MACHINE" = false ]; then
+    # If not setting up a work account, use the hostname as the title
+    TITLE=$(hostname)" (Personal)"
+else
+    # If setting up a work account, use the hostname and company name as the title
+    TITLE=$(hostname)" (${WORK_COMPANY_NAME})"
+fi
+PUBKEY=$(cat "${HOME}/.ssh/${PUB_KEY_NAME}.pub")
 
 # https://docs.github.com/en/rest/users/keys?apiVersion=2022-11-28#create-a-public-ssh-key-for-the-authenticated-user
 RESPONSE=$(
@@ -54,44 +69,14 @@ KEYID=$(echo "$RESPONSE" |
 
 echo "Public key deployed to remote service."
 
-if [ ! -z $WORK_COMPANY_NAME ]; then
-    echo "Deploying ${WORK_COMPANY_NAME} public key to GitHub..."
-
-    TITLE=$(hostname)" (${WORK_COMPANY_NAME})"
-    PUBKEY=$(cat "${HOME}/.ssh/${WORK_DOMAIN_NAME}_github_rsa.pub")
-
-    RESPONSE=$(
-        curl -s -L -X POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer ${GITHUB_TOKEN}" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            https://api.github.com/user/keys \
-            -d "{\"title\":\"${TITLE}\",\"key\":\"${PUBKEY}\"}"
-        )
-
-    echo "$RESPONSE"
-    KEYID=$(echo "$RESPONSE" |
-        grep -o '\"id.*' |
-        grep -o "[0-9]*" |
-        grep -m 1 "[0-9]*")
-
-    echo "Public key deployed to remote service."
-fi
-
 # Add SSH Key to the local ssh-agent
 echo "Adding SSH key to the ssh-agent..."
 
 eval "$(ssh-agent -s)"
 if is-macos; then
-    ssh-add --apple-use-keychain "${HOME}/.ssh/github_rsa"
+    ssh-add --apple-use-keychain "${HOME}/.ssh/${PUB_KEY_NAME}"
 else
-    ssh-add "${HOME}/.ssh/github_rsa"
-fi
-
-if is-macos && [ ! -z $WORK_EMAIL ]; then
-    ssh-add --apple-use-keychain "${HOME}/.ssh/${WORK_DOMAIN_NAME}_github_rsa"
-else
-    ssh-add "${HOME}/.ssh/${WORK_DOMAIN_NAME}_github_rsa"
+    ssh-add "${HOME}/.ssh/${PUB_KEY_NAME}"
 fi
 
 echo "Added SSH key to the ssh-agent."
@@ -101,19 +86,15 @@ echo "Modifying SSH config for GitHub..."
 
 SSH_CONFIG="$HOME/.ssh/config"
 
-# If the SSH config file already exists, warn the user and do not overwrite it
 if [ -f "$SSH_CONFIG" ]; then
+    # If the SSH config file already exists, warn the user and do not overwrite it
     echo "${SSH_CONFIG} already exists, please amend it manually to avoid overwriting any custom settings!"
-fi
-# If the SSH config file does not exist and WORK_EMAIL is not set, create it with default settings
-if [ ! -f "$SSH_CONFIG" && -z $WORK_EMAIL]; then
+elif [ ! -f "$SSH_CONFIG" ] && [ "$GITHUB_SET_WORK_ACCOUNT" = false ]; then
+    # If the SSH config file does not exist and WORK_EMAIL is not set,
+    # create it with default settings
+    echo "Creating SSH config file for personal GitHub account..."
     touch "$SSH_CONFIG"
-    echo -e "Host github.com\n  IgnoreUnknown UseKeychain\n  AddKeysToAgent yes\n  UseKeychain yes\n  IdentityFile ~/.ssh/github_rsa" > "$SSH_CONFIG"
-fi
-# If the SSH config file does not exist and WORK_EMAIL is set, create it with both personal and work settings
-if [ ! -f "$SSH_CONFIG" && ! -z $WORK_EMAIL]; then
-    echo -e "Host github-${WORK_DOMAIN_NAME}\n  HostName github.com\n  IgnoreUnknown UseKeychain\n  AddKeysToAgent yes\n  UseKeychain yes\n  IdentityFile ~/.ssh/${WORK_DOMAIN_NAME}_github_rsa" > "$SSH_CONFIG"
-    echo -e "\nHost github-gripep\n  HostName github.com\n  IgnoreUnknown UseKeychain\n  AddKeysToAgent yes\n  UseKeychain yes\n  IdentityFile ~/.ssh/github_rsa" >> "$SSH_CONFIG"
+    echo -e "Host github.com\n  IgnoreUnknown UseKeychain\n  AddKeysToAgent yes\n  UseKeychain yes\n  IdentityFile ~/.ssh/${PUB_KEY_NAME}" > "$SSH_CONFIG"
 fi
 
 echo "SSH config updated."
@@ -123,4 +104,4 @@ echo "Testing SSH connection to GitHub..."
 ssh -T git@github.com || true
 
 # Final message
-echo "GitHub SSH key setup completed successfully!"
+echo "GitHub SSH key setup completed!"

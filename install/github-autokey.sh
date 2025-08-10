@@ -114,7 +114,7 @@ echo "Added SSH key to the ssh-agent."
 
 # Test the SSH connection
 echo "Testing SSH connection to GitHub..."
-ssh -T git@github.com || true
+ssh -o StrictHostKeyChecking=accept-new -T git@github.com || true
 
 # Final message
 echo "GitHub SSH key setup completed!"

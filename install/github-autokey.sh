@@ -84,6 +84,8 @@ echo "Added SSH key to the ssh-agent."
 # Modify SSH config file
 echo "Modifying SSH config for GitHub..."
 
+eval "$(ssh-agent -s)"
+
 SSH_CONFIG="$HOME/.ssh/config"
 
 if [ -f "$SSH_CONFIG" ]; then
@@ -98,6 +100,17 @@ else
 fi
 
 echo "SSH config updated."
+
+# Add SSH Key to the local ssh-agent
+echo "Adding SSH key to the ssh-agent..."
+
+if is-macos; then
+    ssh-add --apple-use-keychain "${HOME}/.ssh/${PUB_KEY_NAME}"
+else
+    ssh-add "${HOME}/.ssh/${PUB_KEY_NAME}"
+fi
+
+echo "Added SSH key to the ssh-agent."
 
 # Test the SSH connection
 echo "Testing SSH connection to GitHub..."

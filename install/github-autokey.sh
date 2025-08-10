@@ -19,8 +19,8 @@
 
 set -eu -o pipefail
 
-# Source .env file if it exists
-env-activate "${DOTFILES_DIR}/sys/.env"
+# Source .env file
+source "${DOTFILES_DIR}/system/.env"
 
 # Generate SSH Key
 echo "Generating SSH key(s)..."
@@ -89,7 +89,7 @@ SSH_CONFIG="$HOME/.ssh/config"
 if [ -f "$SSH_CONFIG" ]; then
     # If the SSH config file already exists, warn the user and do not overwrite it
     echo "${SSH_CONFIG} already exists, please amend it manually to avoid overwriting any custom settings!"
-elif [ ! -f "$SSH_CONFIG" ] && [ "$GITHUB_SET_WORK_ACCOUNT" = false ]; then
+else
     # If the SSH config file does not exist and WORK_EMAIL is not set,
     # create it with default settings
     echo "Creating SSH config file for personal GitHub account..."

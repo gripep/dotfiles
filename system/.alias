@@ -3,18 +3,6 @@ alias l="ls -la --color"
 
 alias reload="source $HOME/.zshrc"
 
-# Checks out a branch in all repos in the current directory
-# Usage: gco-rec <branch_name>
-# Example: gco-rec main
-alias gco-rec="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} checkout ${1} \;"
-# Pulls all repos in the current directory
-# Usage: gl-rec
-alias gl-rec="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;"
-# Deletes all branches of a repo but the specified one
-# Usage: gbd-not <branch_name>
-# Example: gbd-not main
-alias gbd-not="git branch | grep -v ${1} | xargs git branch -D"
-
 # Named directories
 # Using the `hash` command - it creates a dir hash (shortcut) in zsh only
 hash -d src=$HOME/Developer/src

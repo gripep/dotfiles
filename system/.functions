@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# Create a directory if it doesn't exist
+mk() {
+    mkdir -p "$@"
+}
+
+# Create a directory if it doesn't exist and cd into it
+mkcd() {
+    mk "$@" && cd "$@"
+}

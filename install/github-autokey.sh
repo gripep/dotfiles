@@ -23,18 +23,15 @@ set -eu -o pipefail
 source "${DOTFILES_DIR}/system/.env"
 
 # Generate SSH Key
-echo "Generating SSH key(s)..."
+echo "Generating SSH key..."
 
 PUB_KEY_NAME="id_ed25519"
-
 ssh-keygen -t ed25519 -C "$MY_EMAIL" -f "${HOME}/.ssh/${PUB_KEY_NAME}" -q -N ""
-echo "SSH key generated for personal account with email: ${MY_EMAIL}..."
 
-echo "SSH key(s) generated."
+echo "SSH key generated for ${MY_EMAIL}."
 
-# Deploy the public key to GitHub
-echo "Deploying personal public key to GitHub..."
-
+# Create a public SSH key on GitHub
+echo "Creating public SSH key on GitHub..."
 
 if [ -z "${GITHUB_TOKEN}" ]; then
     echo "GITHUB_TOKEN environment variable is not set. Please set it to your GitHub Fine-grained Token."
@@ -67,28 +64,27 @@ KEYID=$(echo "$RESPONSE" |
     grep -o "[0-9]*" |
     grep -m 1 "[0-9]*")
 
-echo "Public key deployed to remote service."
-
+echo "Public SSH key created."
 
 # Modify SSH config file
-echo "Modifying SSH config for GitHub..."
+echo "Modifying local SSH config..."
 
 eval "$(ssh-agent -s)"
 
 SSH_CONFIG="$HOME/.ssh/config"
-
 if [ -f "$SSH_CONFIG" ]; then
     # If the SSH config file already exists, warn the user and do not overwrite it
     echo "${SSH_CONFIG} already exists, please amend it manually to avoid overwriting any custom settings!"
 else
     # If the SSH config file does not exist and WORK_EMAIL is not set,
     # create it with default settings
-    echo "Creating SSH config file for personal GitHub account..."
+    echo "Creating SSH config file for GitHub account..."
+
     touch "$SSH_CONFIG"
     echo -e "Host github.com\n  IgnoreUnknown UseKeychain\n  AddKeysToAgent yes\n  UseKeychain yes\n  IdentityFile ~/.ssh/${PUB_KEY_NAME}" > "$SSH_CONFIG"
 fi
 
-echo "SSH config updated."
+echo "Local SSH config updated."
 
 # Add SSH Key to the local ssh-agent
 echo "Adding SSH key to the ssh-agent..."

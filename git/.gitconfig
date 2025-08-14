@@ -92,7 +92,3 @@
 [user]
 	name = Gian
 	email = 30044863+gripep@users.noreply.github.com
-
-# TODO: Include on work machine with [user] section and company email (if required)
-# [includeIf "gitdir:~/<company-name>/"]
-#     path = ~/Developer/opt/<company-name>/.gitconfig

@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+
+# This script provides a dotfiles CLI to manage your dotfiles
+
+BIN_NAME=$(basename "$0")
+COMMAND_NAME="$1"
+
+DOTFILES_DIR="$HOME/.dotfiles"
+DOTFILES_IDE="code"
+
+sub_help() {
+    echo "Usage: $BIN_NAME <command>"
+    echo
+    echo "Commands:"
+    echo "   help             This help message"
+    echo "   edit             Open dotfiles in vim"
+    echo "   update           Update packages and pkg managers (packages, pip, gem, asdf)"
+    echo "   ---   "
+    echo "   macos            Apply macOS-specific configurations"
+}
+
+sub_edit() {
+    echo "Opening dotfiles..."
+    /usr/bin/env zsh -c "$DOTFILES_IDE $DOTFILES_DIR"
+}
+
+sub_update() {
+    echo "Updating packages..."
+    
+    if is-macos; then
+        echo "Updating Homebrew packages..."
+        brew update && brew upgrade && brew cleanup
+
+        echo "Updating pip..."
+        pip install --upgrade pip
+
+        echo "Updating gem..."
+        sudo gem update
+    else
+        echo "OS not supported. Available: macOS"
+    fi
+}
+
+sub_macos() {
+    if ! is-macos; then
+        echo "Can only be run on macOS."
+        exit 1
+    fi
+
+    echo "Updating dock..."
+    . "$DOTFILES_DIR/macos/dock.sh"
+
+    for DEFAULTS_FILE in "${DOTFILES_DIR}"/macos/defaults*.sh; do
+        echo "Applying ${DEFAULTS_FILE}" && . "${DEFAULTS_FILE}"
+    done
+}
+
+
+# Main
+case $COMMAND_NAME in
+    "" | "-h" | "--help")
+        sub_help
+        ;;
+*)
+    shift
+    if declare -f "sub_${COMMAND_NAME}" > /dev/null; then
+        "sub_${COMMAND_NAME}" "$@"
+    else
+        shift
+        echo "'$COMMAND_NAME' is not a known command." >&2
+        sub_help
+        exit 1
+    fi
+    ;;
+esac

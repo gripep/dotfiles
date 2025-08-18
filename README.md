@@ -47,14 +47,18 @@ source ~/.dotfiles/install.sh
 
 5. Update the Dock and System Settings:
 
+Once installation is complete, the `dotfiles` CLI is available in your shell.  
+Run `dotfiles --help` to see all available commands.
+
+To get started, run:
+
 ```bash
-source ~/.dotfiles/macos/dock.sh
-source ~/.dotfiles/macos/defaults.sh
-source ~/.dotfiles/macos/defaults-iterm2.sh
+dotfiles macos
+dotfiles update # This will take a while
 ```
 
 N.B.
-The configuration files will live under the `.config/` directory.
+Most of the configuration files will live under the `.config/` directory.
 
 ```bash
 .config
@@ -62,7 +66,7 @@ The configuration files will live under the `.config/` directory.
 └── zsh
 ```
 
-All development-related files will live under the `Developer/` directory. Inside, there will be a Linux-style structure to keep things tidy, e.g. `bin/`, `opt/`, `src/`, `tmp/`, etc.
+Everything development-related will live under the `Developer/` directory. Inside, there will be a Linux-style structure to keep things tidy, e.g. `bin/`, `opt/`, `src/`, `tmp/`, etc.
 
 ```bash
 Developer

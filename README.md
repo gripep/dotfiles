@@ -45,6 +45,14 @@ You might have to log-in into your GitHub account to set the `GITHUB_TOKEN` env 
 source ~/.dotfiles/install.sh
 ```
 
+5. Update the Dock and System Settings:
+
+```bash
+source ~/.dotfiles/macos/dock.sh
+source ~/.dotfiles/macos/defaults.sh
+source ~/.dotfiles/macos/defaults-iterm2.sh
+```
+
 N.B.
 The configuration files will live under the `.config/` directory.
 
@@ -64,3 +72,9 @@ Developer
 ├── ...
 └── tmp  # for any temp or throwaway stuff
 ```
+
+# Thanks to...
+
+- [jm96441n](https://github.com/jm96441n) and his [dotfiles repo](https://github.com/jm96441n/dotfiles)
+- [driesvints](https://github.com/driesvints) and his [dotfiles repo](https://github.com/driesvints/dotfiles)
+- The [dotfiles community](https://dotfiles.github.io/)

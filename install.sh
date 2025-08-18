@@ -18,9 +18,6 @@ fi
 if is-macos; then
     echo "Setting up macOS environment..."
 
-    # Set up general directories
-    echo "Creating general directories..."
-    mkdir -p $HOME/Screenshots
     # Set up development directories
     echo "Creating base directories for development..."
     mkdir -p $HOME/.config

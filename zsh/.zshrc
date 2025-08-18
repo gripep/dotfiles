@@ -8,18 +8,19 @@ export ZSH="$ZSH_DIR/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set & apply plugins
+# Plugins list: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins
 plugins=(
     brew
-    # copyfile
-    # copypath
-    # extract
+    copyfile
+    copypath
+    extract
     # fzf
     # fzf-tab
     git
     # git-extras
-    poetry
     # tmux
     # tmuxinator
+    universalarchive
     zsh-autosuggestions
     zsh-completions
     zsh-syntax-highlighting

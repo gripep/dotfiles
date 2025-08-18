@@ -88,9 +88,10 @@ defaults write com.apple.controlcenter "NSStatusItem Visible AirDrop" -bool "fal
 defaults write com.apple.controlcenter "NSStatusItem Visible StageManager" -bool "false"
 
 # Show battery percentage in the menu bar
+# TODO: Not working on more modern versions of macOS - many settings have been moved into the Control Center, making them less accessible via defaults
 defaults write com.apple.menuextra.battery ShowPercent -string "YES"
 
-# DO NOT shoe Spotlight in the menu bar
+# DO NOT show Spotlight in the menu bar
 defaults write com.apple.controlcenter "NSStatusItem Visible Spotlight" -bool "false"
 
 ###############################################################################

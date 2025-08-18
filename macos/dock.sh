@@ -20,7 +20,6 @@ dockutil --no-restart --add "/Applications/Notion.app"
 dockutil --no-restart --add "/Applications/Todoist.app"
 dockutil --no-restart --add "/Applications/Calendar.app"
 dockutil --no-restart --add "/System/Applications/System Settings.app"
-dockutil --no-restart --add "/Applications/ExpressVPN.app"
 
 dockutil --no-restart --add "/Users/$USER/Downloads" --view list
 

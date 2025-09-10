@@ -14,7 +14,7 @@ sub_help() {
     echo "Commands:"
     echo "   help             This help message"
     echo "   edit             Open dotfiles in vim"
-    echo "   update           Update packages and pkg managers (packages, pip, gem, asdf)"
+    echo "   update           Update packages and pkg managers (packages, pip, gem, etc.)"
     echo "   ---   "
     echo "   macos            Apply macOS-specific configurations"
 }

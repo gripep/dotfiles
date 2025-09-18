@@ -6,3 +6,10 @@
 #   bat --list-themes
 # or use themes compatible with sublime text (.tmTheme files)
 export BAT_THEME="gruvbox-dark"
+
+# Docker
+
+# Enable Docker CLI completions
+fpath=($HOME/.docker/completions $fpath)
+autoload -Uz compinit
+compinit

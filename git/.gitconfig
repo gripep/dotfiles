@@ -26,7 +26,8 @@
 	filemode = false
 	autocrlf = input
 	excludesfile = ~/.gitignore_global
-	editor = code --wait
+	# TODO: Probably worth with vim, awkward with vscode...
+	# editor = code --wait
 	pager = delta
 	whitespace = error
 

@@ -77,6 +77,10 @@ Developer
 └── tmp  # for any temp or throwaway stuff
 ```
 
+For ad-hoc aliases, commands, and other tweaks, create a `/system/.custom` file and add them there. The zsh config loads it automatically, and git ignores the file.
+
+The `~/Developer/bin` directory is also added to your PATH automatically.
+
 # Thanks to...
 
 - [jm96441n](https://github.com/jm96441n) and his [dotfiles repo](https://github.com/jm96441n/dotfiles)

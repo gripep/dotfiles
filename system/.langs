@@ -1,7 +1,7 @@
 # Languages and tools environment variables for Zsh
 
 ###############################################################################
-# Flutter                                                                     #
+# Flutter (+ Dart)                                                            #
 ###############################################################################
 
 export PATH="$PATH:$HOME/Developer/opt/flutter/bin"
@@ -24,9 +24,6 @@ PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
 PYENV_ROOT="$HOME/.pyenv" # Path to pyenv root
 export PATH="$PYENV_ROOT/shims:$PATH" # Path to pyenv shims
 eval "$(pyenv init -)" # Initialize pyenv
-
-# tox
-export PATH="$PATH:$HOME/.local/bin"
 
 ###############################################################################
 # Rust                                                                        #

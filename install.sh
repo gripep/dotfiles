@@ -26,6 +26,8 @@ else
     echo "Currently only macOS is supported. Exiting..."
     exit
 fi
+# Create the .custom file for ad-hoc aliases, commands, etc...
+touch "$DOTFILES_DIR/system/.custom"
 
 # Install Homebrew (if not installed), and apps and tools
 . "$DOTFILES_DIR/install/homebrew.sh" || true

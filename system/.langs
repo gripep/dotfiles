@@ -26,6 +26,13 @@ export PATH="$PYENV_ROOT/shims:$PATH" # Path to pyenv shims
 eval "$(pyenv init -)" # Initialize pyenv
 
 ###############################################################################
+# Ruby                                                                        #
+###############################################################################
+
+# Use Homebrew-installed Ruby instead of the system Ruby
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+
+###############################################################################
 # Rust                                                                        #
 ###############################################################################
 

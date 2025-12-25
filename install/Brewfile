@@ -13,10 +13,11 @@ brew "git-delta" # Syntax-highlighting pager for git and diff output
 brew "mas"  # Mac App Store command line interface
 brew "mkcert"  # Simple tool to make locally trusted development certificates
 brew "nvm"  # Manage multiple Node.js versions
+brew "pipx"  # Install and run Python applications in isolated environments, e.g. poetry
 brew "pkgconf"  # Package compiler and linker metadata toolkit
-brew "poetry" # Python dependency management and packaging tool
 brew "postgresql@15"
 brew "pyenv"  # Python version management
+brew "ruby"
 brew "tox"  # Generic Python virtualenv management and test command-line tool
 brew "tree"
 

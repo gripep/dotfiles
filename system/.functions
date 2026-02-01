@@ -9,3 +9,9 @@ mk() {
 mkcd() {
     mk "$@" && cd "$@"
 }
+
+# Delete all branches except main or the specified branch
+git-branch-cleanup() {
+    keep_branch=${1:-main}
+    git branch | grep -v "$keep_branch" | xargs git branch -D
+}

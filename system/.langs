@@ -14,16 +14,16 @@ export PATH="$PATH:$HOME/.pub-cache/bin"
 ###############################################################################
 
 export GOPATH="$HOME/Developer/opt/go"
-PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
+export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
 
 ###############################################################################
 # Python                                                                      #
 ###############################################################################
 
 # pyenv
-PYENV_ROOT="$HOME/.pyenv" # Path to pyenv root
+export PYENV_ROOT="$HOME/.pyenv" # Path to pyenv root
 export PATH="$PYENV_ROOT/shims:$PATH" # Path to pyenv shims
-eval "$(pyenv init -)" # Initialize pyenv
+eval "$(pyenv init - -zsh)" # Initialize pyenv
 
 ###############################################################################
 # Ruby                                                                        #

@@ -14,6 +14,7 @@ sub_help() {
     echo "Commands:"
     echo "   help             This help message"
     echo "   edit             Open dotfiles in your IDE ($DOTFILES_IDE)"
+    echo "   upgrade          Pull the latest changes from the dotfiles repository"
     echo "   update           Update packages and pkg managers (packages, pip, gem, etc.)"
     echo "   ---   "
     echo "   macos            Apply macOS-specific configurations"
@@ -22,6 +23,17 @@ sub_help() {
 sub_edit() {
     echo "Opening dotfiles..."
     /usr/bin/env zsh -c "$DOTFILES_IDE $DOTFILES_DIR"
+}
+
+sub_upgrade() {
+    echo "Upgrading dotfiles..."
+    git -C "$DOTFILES_DIR" pull --rebase
+
+    echo "Reloading shell configuration..."
+    # Replace the current shell with a login zsh
+    # and load the user's zsh configuration.
+    # Using /usr/bin/env to avoid hard-coding the path to zsh
+    /usr/bin/env zsh -c "source ~/.zshrc"
 }
 
 sub_update() {

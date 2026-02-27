@@ -23,6 +23,9 @@ sub_help() {
 sub_edit() {
     echo "Opening dotfiles..."
     /usr/bin/env zsh -c "$DOTFILES_IDE $DOTFILES_DIR"
+
+    echo "Changing directory to dotfiles..."
+    /usr/bin/env zsh -c "cd $DOTFILES_DIR && exec zsh"
 }
 
 sub_upgrade() {

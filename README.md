@@ -81,6 +81,8 @@ For ad-hoc aliases, commands, and other tweaks, use the `/system/.custom` file a
 
 The `~/Developer/bin` directory is also added to your PATH automatically.
 
+Run the `clean.sh` script to remove personal files and configuration from your machine. Read the file comments to find out more.
+
 # Thanks to...
 
 - [jm96441n](https://github.com/jm96441n) and his [dotfiles repo](https://github.com/jm96441n/dotfiles)

@@ -7,11 +7,8 @@
 if ! is-executable brew; then
     echo "Homebrew not found. Installing..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    
-    echo "Adding Homebrew to PATH..."
-    echo >> $HOME/.zprofile
-    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $HOME/.zprofile
-    eval "$(/opt/homebrew/bin/brew shellenv)"
+    echo "N.B. Homebrew is already added to the PATH in the .zshrc file, so we don't need to do anything else here."
+    echo "Homebrew installation complete."
 else
     echo "Homebrew is already installed. Continue..."
 fi

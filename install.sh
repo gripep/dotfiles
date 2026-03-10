@@ -48,5 +48,8 @@ ln -sfv "$DOTFILES_DIR/zsh/.p10k.zsh" "$HOME/.config/zsh/.p10k.zsh"
 # GitHub setup
 . "$DOTFILES_DIR/install/github-autokey.sh"
 
+# Install tools (that are not installed via Homebrew)
+. "$DOTFILES_DIR/install/tools.sh"
+
 # Install projects
 . "$DOTFILES_DIR/install/projects.sh"

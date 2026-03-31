@@ -5,6 +5,8 @@
 # or dependencies clashes with Homebrew packages.
 
 # gemini-cli (Google Gemini AI models cli tool)
+# TODO: check if this is needed
+# export NVM_DIR="$HOME/.nvm"
 if ! command -v nvm &> /dev/null; then
     # Check if nvm was installed, if not install it via Homebrew
     echo "nvm not found. Installing nvm via Homebrew..."

@@ -10,6 +10,20 @@ mkcd() {
     mk "$@" && cd "$@"
 }
 
+# Load a .env file into the environment
+loadenv() {
+    env_file="${1:-.env}"
+
+    if [[ ! -f "$env_file" ]]; then
+        echo "Error: File '$env_file' not found."
+        return 1
+    fi
+
+    set -a
+    source "$env_file"
+    set +a
+}
+
 # Delete all branches except main or the specified branch
 git-branch-cleanup() {
     keep_branch=${1:-main}

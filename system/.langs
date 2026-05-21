@@ -25,6 +25,13 @@ export PYENV_ROOT="$HOME/.pyenv" # Path to pyenv root
 export PATH="$PYENV_ROOT/shims:$PATH" # Path to pyenv shims
 eval "$(pyenv init - -zsh)" # Initialize pyenv
 
+# poetry
+
+# Minimum age of a package release in days before it is considered during dependency resolution.
+# Safeguard against supply chain attacks.
+# https://python-poetry.org/docs/configuration#solvermin-release-age
+export POETRY_SOLVER_MIN_RELEASE_AGE=7
+
 ###############################################################################
 # Ruby                                                                        #
 ###############################################################################

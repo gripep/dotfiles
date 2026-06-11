@@ -31,6 +31,8 @@ eval "$(pyenv init - -zsh)" # Initialize pyenv
 # Safeguard against supply chain attacks.
 # https://python-poetry.org/docs/configuration#solvermin-release-age
 export POETRY_SOLVER_MIN_RELEASE_AGE=7
+# https://python-poetry.org/docs/configuration/#solvermin-release-age-exclude-source
+export POETRY_SOLVER_MIN_RELEASE_AGE_EXCLUDE_SOURCE="testpypi"
 
 ###############################################################################
 # Ruby                                                                        #

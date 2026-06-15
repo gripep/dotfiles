@@ -5,7 +5,9 @@
 # You can install all the packages listed in the Brewfile using the command:
 #   brew bundle --file Brewfile
 
-tap "ngrok/ngrok"
+# Taps need to be trusted. Read https://docs.brew.sh/Tap-Trust
+
+tap "ngrok/ngrok", trusted: true
 
 brew "awscli" # Official Amazon AWS command-line interface
 brew "bat" # Clone of cat(1) with syntax highlighting and Git integration

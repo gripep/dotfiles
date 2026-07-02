@@ -19,6 +19,7 @@ brew "pipx"  # Install and run Python applications in isolated environments, e.g
 brew "pkgconf"  # Package compiler and linker metadata toolkit
 brew "postgresql@15"
 brew "pyenv"  # Python version management
+brew "ripgrep"  # Search tool similar to grep, but faster
 brew "ruby"
 brew "tox"  # Generic Python virtualenv management and test command-line tool
 brew "tree"

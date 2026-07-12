@@ -18,3 +18,7 @@ npm-debug.log
 ### Logs and databases ###
 *.log
 *.sqlite
+
+# AI agents
+
+**/.claude/settings.local.json

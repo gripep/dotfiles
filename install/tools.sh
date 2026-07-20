@@ -10,8 +10,14 @@ install_gemini_cli() {
         return
     fi
     echo "gemini-cli not found. Installing..."
+
+    # Load nvm into the current shell (installed via homebrew).
+    # N.B. File .langs sources this for interactive shells, but not during install
     export NVM_DIR="$HOME/.nvm"
-    nvm use stable
+    mkdir -p "$NVM_DIR"
+    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+
+    nvm install stable  # installs latest stable node + npm, and switches to it
     npm install -g @google/gemini-cli
 }
 

@@ -9,9 +9,9 @@ export DOTFILES_DIR="$HOME/.dotfiles"
 PATH="$DOTFILES_DIR/bin:$PATH"
 
 # Make dotfiles up-to-date first if available (pull latest changes if git is available)
-if is-executable git && -d "$DOTFILES_DIR/.git"; then
+if is-executable git && [ -d "$DOTFILES_DIR/.git" ]; then
     echo "Pulling latest changes from the dotfiles repository..."
-    git --work-tree="$DOTFILES_DIR" --git-dir="$DOTFILES_DIR/.git" pull origin master
+    git --work-tree="$DOTFILES_DIR" --git-dir="$DOTFILES_DIR/.git" pull origin main
 fi
 
 # System setup

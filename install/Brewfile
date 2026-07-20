@@ -18,6 +18,7 @@ brew "mkcert"  # Simple tool to make locally trusted development certificates
 brew "nvm"  # Manage multiple Node.js versions
 brew "pipx"  # Install and run Python applications in isolated environments, e.g. poetry
 brew "pkgconf"  # Package compiler and linker metadata toolkit
+brew "pnpm"  # Fast, disk space efficient package manager for Node.js
 brew "postgresql@15"
 brew "pyenv"  # Python version management
 brew "ripgrep"  # Search tool similar to grep, but faster
@@ -33,15 +34,13 @@ cask "claude"
 cask "claude-code"
 cask "codex"
 cask "discord"
-cask "docker"
+cask "docker-desktop"
 cask "expressvpn"
-cask "firefox"
 cask "google-drive"
 cask "google-chrome"
 cask "iterm2"
 cask "notion"
 cask "ngrok"
-cask "pnpm"
 cask "postman"
 cask "slack"
 cask "spotify"

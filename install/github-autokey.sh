@@ -22,21 +22,31 @@ set -eu -o pipefail
 # Source .env file
 source "${DOTFILES_DIR}/system/.env"
 
+PUB_KEY_NAME="id_ed25519"
+KEY_PATH="${HOME}/.ssh/${PUB_KEY_NAME}"
+
+# Validate the token before generating anything
+if [ -z "${GITHUB_TOKEN:-}" ]; then
+    echo "GITHUB_TOKEN environment variable is not set. Please set it to your GitHub Fine-grained Token."
+    exit 1
+fi
+
+# Skip the whole setup if the key already exists (avoids overwriting it and
+# uploading a duplicate key to GitHub on re-runs)
+if [ -f "$KEY_PATH" ]; then
+    echo "SSH key ${KEY_PATH} already exists. Skipping GitHub SSH setup."
+    return 0 2>/dev/null || exit 0
+fi
+
 # Generate SSH Key
 echo "Generating SSH key..."
 
-PUB_KEY_NAME="id_ed25519"
-ssh-keygen -t ed25519 -C "$MY_EMAIL" -f "${HOME}/.ssh/${PUB_KEY_NAME}" -q -N ""
+ssh-keygen -t ed25519 -C "$MY_EMAIL" -f "$KEY_PATH" -q -N ""
 
 echo "SSH key generated for ${MY_EMAIL}."
 
 # Create a public SSH key on GitHub
 echo "Creating public SSH key on GitHub..."
-
-if [ -z "${GITHUB_TOKEN}" ]; then
-    echo "GITHUB_TOKEN environment variable is not set. Please set it to your GitHub Fine-grained Token."
-    exit 1
-fi
 
 # Args for the GitHub API request
 if [ "$IS_WORK_MACHINE" = false ]; then

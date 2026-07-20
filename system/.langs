@@ -23,7 +23,7 @@ export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv" # Path to pyenv root
 export PATH="$PYENV_ROOT/shims:$PATH" # Path to pyenv shims
-eval "$(pyenv init - -zsh)" # Initialize pyenv
+eval "$(pyenv init - zsh)" # Initialize pyenv
 
 # poetry
 

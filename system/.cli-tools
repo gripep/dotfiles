@@ -7,6 +7,11 @@
 # or use themes compatible with sublime text (.tmTheme files)
 export BAT_THEME="gruvbox-dark"
 
+# Claude Code
+
+# Enable fullscreen rendering, reducing flicker and keeping memory flat in long conversations
+export CLAUDE_CODE_NO_FLICKER=1
+
 # Docker
 
 # Enable Docker CLI completions

@@ -10,6 +10,15 @@ At the moment, [macOS](#macos) is the only config available.
 
 ### macOS
 
+> **Requirements:** Apple Silicon (M1 or newer). The install scripts assume
+> Homebrew under `/opt/homebrew` and will exit on Intel Macs.
+
+Before you start:
+
+- Sign in to the App Store (required for `mas` to install Mac App Store apps).
+- Some App Store apps (e.g. Magnet) must already be purchased with your Apple ID,
+  otherwise the Homebrew bundle step will fail on them.
+
 1. Ensure your system is up to date:
 
 ```bash

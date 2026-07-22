@@ -13,11 +13,14 @@ projects=(
     leetCode
 )
 
-# Clone the repos if they don't exist
-cd $PROJECTS_DIR || exit
+# Clone the repos if they don't exist, otherwise update them
+cd "$PROJECTS_DIR" || return
 for project in "${projects[@]}"; do
     if [ ! -d "$PROJECTS_DIR/$project" ]; then
         git clone "https://github.com/gripep/$project.git"
+    else
+        echo "Updating $project..."
+        git -C "$PROJECTS_DIR/$project" pull --ff-only || true
     fi
 done
-cd || exit
+cd || return

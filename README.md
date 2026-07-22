@@ -10,17 +10,22 @@ At the moment, [macOS](#macos) is the only config available.
 
 ### macOS
 
+> **Requirements:** Apple Silicon (M1 or newer). The install scripts assume
+> Homebrew under `/opt/homebrew` and will exit on Intel Macs.
+
+Before you start:
+
+- Connect your mouse and keyboard.
+- Sign in to the App Store (required for `mas` to install Mac App Store apps).
+  Some apps (e.g. Magnet) must already be purchased with your Apple ID,
+  otherwise the Homebrew bundle step will fail on them.
+
 1. Ensure your system is up to date:
 
 ```bash
 sudo softwareupdate -i -a
 xcode-select --install
 ```
-
-And finally
-
-- Connect your mouse and keyboard
-- Log-in into the AppStore
 
 2. Clone this repo:
 
@@ -39,13 +44,33 @@ cp ~/.dotfiles/system/.env.example ~/.dotfiles/system/.env
 N.B.
 You might have to log-in into your GitHub account to set the `GITHUB_TOKEN` env variable.
 
-4. Run the installation script:
+4. (Optional) Customize what gets installed:
+
+You can tune the install at two levels before running it:
+
+- **Skip a whole phase**: comment out its `. "$DOTFILES_DIR/install/…"` line
+  in `install.sh`. Each of these lines runs a script, so commenting one out
+  skips that step entirely: `install/oh-my-zsh.sh`, `install/github-autokey.sh`,
+  `install/tools.sh`, `install/projects.sh`.
+- **Toggle individual items**: edit the relevant file directly.
+  - `install/Brewfile`: comment out apps/tools you don't want (this is data
+    fed to `brew bundle`, so there's no phase-level switch). For example,
+    comment `mas "Magnet"` on a work laptop where it isn't purchased on your
+    Apple ID, or drop personal apps (`spotify`, `discord`, `whatsapp`, …),
+    work apps (`slack`, `zoom`, `docker-desktop`), or role-specific tooling
+    (`android-studio`, `awscli`, `postgresql@15`, …). Leave the core CLI tools
+    (`bat`, `gh`, `git-delta`, `ripgrep`, `nvm`, `pyenv`, …) in place.
+  - `install/projects.sh`: add or remove entries in the `projects` array.
+  - `install/tools.sh`: comment the `install_gemini_cli` call to skip the
+    Gemini CLI.
+
+5. Run the installation script:
 
 ```bash
 source ~/.dotfiles/install.sh
 ```
 
-5. Update the Dock and System Settings:
+6. Update the Dock and System Settings:
 
 Once installation is complete, the `dotfiles` CLI is available in your shell.  
 Run `dotfiles --help` to see all available commands.

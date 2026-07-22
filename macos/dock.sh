@@ -21,7 +21,7 @@ dockutil --no-restart --add "/Applications/Todoist.app"
 dockutil --no-restart --add "/Applications/Calendar.app"
 dockutil --no-restart --add "/System/Applications/System Settings.app"
 
-dockutil --no-restart --add "/Users/$USER/Downloads" --view list
+dockutil --no-restart --add "$HOME/Downloads" --view list
 
 killall Dock
 

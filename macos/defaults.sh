@@ -6,8 +6,7 @@
 # https://macos-defaults.com
 
 # Machine config lives in .env, which .zshrc does not load into interactive
-# shells. Source it here so this script is self-contained (same pattern as
-# install/github-autokey.sh).
+# shells. Source it here so this script is self-contained.
 if [ ! -f "$DOTFILES_DIR/system/.env" ]; then
     echo "Missing $DOTFILES_DIR/system/.env"
     echo "Copy system/.env.example to system/.env and fill it in first."
@@ -15,13 +14,17 @@ if [ ! -f "$DOTFILES_DIR/system/.env" ]; then
 fi
 . "$DOTFILES_DIR/system/.env"
 
-# Validate required values before touching any system settings
+# Validate the values this script relies on before applying its settings
 if [ -z "${MY_NAME:-}" ]; then
     echo "MY_NAME is not set in .env. Set it before applying macOS defaults."
     exit 1
 fi
 if [ "${IS_WORK_MACHINE:-}" != "true" ] && [ "${IS_WORK_MACHINE:-}" != "false" ]; then
     echo "IS_WORK_MACHINE must be 'true' or 'false' in .env (got '${IS_WORK_MACHINE:-}')."
+    exit 1
+fi
+if [ "$IS_WORK_MACHINE" = true ] && [ -z "${WORK_COMPANY_NAME:-}" ]; then
+    echo "WORK_COMPANY_NAME must be set in .env when IS_WORK_MACHINE=true."
     exit 1
 fi
 

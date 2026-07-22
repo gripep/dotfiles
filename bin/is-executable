@@ -2,7 +2,9 @@
 
 # Check if command is executable
 
-if ! command -v "$1" 2>&1 >/dev/null; then
+set -eu -o pipefail
+
+if ! command -v "$1" >/dev/null 2>&1; then
     exit 1
 else
     exit 0

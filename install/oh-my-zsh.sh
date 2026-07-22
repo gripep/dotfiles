@@ -21,11 +21,15 @@ fi
 PLUGINS_DIR="$OMZ_DIR/custom/plugins"
 THEMES_DIR="$OMZ_DIR/custom/themes"
 
-echo "Installing Oh My Zsh plugins and theme..."
 # Clone each plugin/theme only if it isn't there already (safe to re-run)
+echo "Installing Oh My Zsh plugins and theme..."
+# Install zsh-autosuggestions plugin
 [ -d "$PLUGINS_DIR/zsh-autosuggestions" ] || git clone https://github.com/zsh-users/zsh-autosuggestions "$PLUGINS_DIR/zsh-autosuggestions"
+# Install zsh-completions plugin
 [ -d "$PLUGINS_DIR/zsh-completions" ] || git clone https://github.com/zsh-users/zsh-completions.git "$PLUGINS_DIR/zsh-completions"
+# Install zsh-syntax-highlighting plugin
 [ -d "$PLUGINS_DIR/zsh-syntax-highlighting" ] || git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$PLUGINS_DIR/zsh-syntax-highlighting"
+# Install  Powerlevel10k theme
 [ -d "$THEMES_DIR/powerlevel10k" ] || git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$THEMES_DIR/powerlevel10k"
 
 echo "Oh My Zsh and plugins installed successfully."

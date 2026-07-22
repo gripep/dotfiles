@@ -26,6 +26,21 @@ loadenv() {
 
 # Delete all branches except main or the specified branch
 git-branch-cleanup() {
-    keep_branch=${1:-main}
-    git branch | grep -v "$keep_branch" | xargs git branch -D
+    local keep_branch="${1:-main}"
+    local branches
+    branches=$(git branch --format='%(refname:short)' | grep -vx "$keep_branch")
+
+    if [ -z "$branches" ]; then
+        echo "No branches to delete."
+        return 0
+    fi
+
+    echo "The following branches will be deleted:"
+    echo "$branches"
+    printf "Continue? [y/N] "
+    read -r reply
+    [ "$reply" = "y" ] || [ "$reply" = "Y" ] || { echo "Aborted."; return 1; }
+
+    # -d refuses to delete branches with unmerged work
+    echo "$branches" | xargs -n1 git branch -d
 }

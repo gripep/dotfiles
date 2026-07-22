@@ -33,7 +33,7 @@
 
 [credential]
 	# Function to select the appropriate credential helper based on the OS
-	helper = "!f() { if [ \"$(uname -s)\" = Linux ]; then cache --timeout 3600 \"$@\"; else osxkeychain \"$@\"; fi; };f"
+	helper = "!f() { if [ \"$(uname -s)\" = Linux ]; then git credential-cache --timeout 3600 \"$@\"; else git credential-osxkeychain \"$@\"; fi; };f"
 
 [diff]
 	trustExitCode = true

@@ -77,6 +77,10 @@ Developer
 └── tmp  # for any temp or throwaway stuff
 ```
 
+The `.env` file is intentionally **not** sourced by the interactive shell, so secrets (e.g. `GITHUB_TOKEN`) are not leaked into every shell session. Run `loadenv` when you actually need those variables.
+
+> **TODO:** Consider splitting personal, non-secret info I want to inject into commands (e.g. `$EMAIL`) into a separate file that _is_ sourced on shell startup, keeping secrets in `.env` behind `loadenv`.
+
 For ad-hoc aliases, commands, and other tweaks, use the `/system/.custom` file and add them there. The zsh config loads it automatically, and git ignores the file.
 
 The `~/Developer/bin` directory is also added to your PATH automatically.

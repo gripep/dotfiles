@@ -12,15 +12,23 @@ or editing scripts so the codebase stays consistent.
 
 ## Error handling (`set` flags)
 
-- Scripts that are executed directly (`install.sh`, `bin/is-*`) enable
-  `set -eu -o pipefail` near the top.
-- Scripts that are `source`d from another script (e.g. `install/*.sh`,
-  `macos/*.sh`) inherit the caller's options and do not re-declare them.
+- Scripts that are executed directly (`bin/is-*`) enable `set -eu -o pipefail`
+  near the top.
+- `install.sh` is `source`d (per the README) but isolates itself in a subshell
+  that runs under `set -eu -o pipefail`, so a failure or `exit` cannot leak into
+  and kill the caller's interactive shell.
+- Scripts that are `source`d by another script (e.g. `install/*.sh`,
+  `macos/*.sh`) inherit the caller's options and do not re-declare them. The
+  exception is a sourced script that can also be run standalone or is
+  security-sensitive (e.g. `install/github-autokey.sh`, which creates and
+  uploads an SSH key): it keeps its own `set -eu -o pipefail` as a safety net.
 - Relax `-e` only for deliberate best-effort scripts that must continue past
   individual failures, using `set -u` alone:
   - `clean.sh` keeps removing files even if one `rm` fails.
   - `bin/dotfiles` orchestrates best-effort steps (macOS `defaults`, package
-    updates) that should not abort the whole command on a single failure.
+    updates) that should not abort the whole command on a single failure. A
+    sourced config guard (e.g. in `macos/defaults.sh`) may still `exit` to stop
+    on invalid input.
 
 ## Variables
 
@@ -53,7 +61,9 @@ fi
 
 ## Confirmation prompts
 
-Destructive actions prompt with the same shape. Use `exit` in a top-level
+Destructive actions prompt with the same shape. Keep the abort on its own
+statement (use `;`, not `&&`, so a failed `echo` cannot skip the exit and let
+execution fall through to the destructive command). Use `exit` in a top-level
 script and `return` inside a function.
 
 ```bash
@@ -61,7 +71,7 @@ printf "Continue? [y/N] "
 read -r reply
 case "$reply" in
     y | Y) ;;
-    *) echo "Aborted." && exit 0 ;;
+    *) echo "Aborted."; exit 0 ;;   # in a function: return 1
 esac
 ```
 

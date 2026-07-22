@@ -12,7 +12,7 @@ export DOTFILES_DIR="$HOME/.dotfiles"
 PATH="$DOTFILES_DIR/bin:$PATH"
 
 # This setup targets Apple Silicon (arm64) only
-if [ "$(uname -m)" != "arm64" ]; then
+if ! is-arm64; then
     echo "This setup targets Apple Silicon (arm64) Macs only. Detected $(uname -m). Exiting..."
     exit 1
 fi

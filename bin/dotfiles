@@ -67,16 +67,6 @@ sub_macos() {
         exit 1
     fi
 
-    # The defaults scripts read machine config (MY_NAME, IS_WORK_MACHINE,
-    # WORK_COMPANY_NAME) from .env. .zshrc intentionally does not load .env into
-    # interactive shells, so source it here to make those values available.
-    if [ ! -f "$DOTFILES_DIR/system/.env" ]; then
-        echo "Missing $DOTFILES_DIR/system/.env"
-        echo "Copy system/.env.example to system/.env and fill it in first."
-        exit 1
-    fi
-    . "$DOTFILES_DIR/system/.env"
-
     echo "Updating dock..."
     . "$DOTFILES_DIR/macos/dock.sh"
 

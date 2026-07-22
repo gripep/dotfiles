@@ -41,7 +41,7 @@ git-branch-cleanup() {
     read -r reply
     case "$reply" in
         y | Y) ;;
-        *) echo "Aborted." && return 1 ;;
+        *) echo "Aborted."; return 1 ;;
     esac
 
     # -d refuses to delete branches with unmerged work

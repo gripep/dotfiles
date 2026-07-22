@@ -20,7 +20,7 @@ printf "Continue? [y/N] "
 read -r reply
 case "$reply" in
     y | Y) ;;
-    *) echo "Aborted." && exit 0 ;;
+    *) echo "Aborted."; exit 0 ;;
 esac
 
 # Remove iterm2 and zsh config

@@ -12,16 +12,6 @@ export BAT_THEME="gruvbox-dark"
 # Enable fullscreen rendering, reducing flicker and keeping memory flat in long conversations
 export CLAUDE_CODE_NO_FLICKER=1
 
-# Use gpt models with Claude Code
-# export ANTHROPIC_BASE_URL=
-# export ANTHROPIC_AUTH_TOKEN=
-# # Must be empty
-# export ANTHROPIC_API_KEY=
-
-# Codex
-
-# export OPENAI_API_KEY=
-
 # Docker
 
 # Enable Docker CLI completions

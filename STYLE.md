@@ -43,6 +43,14 @@ if ! is-executable brew; then
 fi
 ```
 
+## Environment variables
+
+- `.env` holds machine config and secrets and is never loaded into interactive
+  shells (see `zsh/.zshrc`).
+- A script that needs those values sources `.env` itself (e.g.
+  `macos/defaults.sh`, `install/github-autokey.sh`) rather than relying on a
+  caller to provide them, and validates the values it requires before use.
+
 ## Confirmation prompts
 
 Destructive actions prompt with the same shape. Use `exit` in a top-level

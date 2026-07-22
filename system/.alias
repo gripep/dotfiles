@@ -1,5 +1,5 @@
 # Shortcuts
-alias l="ls -la --color"
+alias l="ls -la -G"
 
 alias reload="source $HOME/.zshrc"
 

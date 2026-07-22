@@ -25,6 +25,6 @@ brew update
 
 # Install all our apps and tools with bundle (see Brewfile)
 echo "Installing apps and tools from Brewfile..."
-brew bundle --file $DOTFILES_DIR/install/Brewfile || exit
+brew bundle --file "$DOTFILES_DIR/install/Brewfile" || exit
 
 echo "Apps and tools installation complete."

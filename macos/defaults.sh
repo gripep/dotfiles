@@ -64,7 +64,7 @@ sudo systemsetup -setusingnetworktime on
 # Set locale to UK (this will also set date and number formats)
 defaults write NSGlobalDomain AppleLocale -string "$LOCALE"
 # Set preferred languages
-defaults write NSGlobalDomain AppleLanguages -array ${PREFERRED_LANGUAGES[@]}
+defaults write NSGlobalDomain AppleLanguages -array "${PREFERRED_LANGUAGES[@]}"
 # Set temperature unit to Celsius (°C)
 defaults write NSGlobalDomain AppleTemperatureUnit -string "Celsius"
 # Set measurement system to Metric
@@ -209,8 +209,8 @@ defaults write com.apple.finder "ShowHardDrivesOnDesktop" -bool "true"
 ###############################################################################
 
 # Set option to save screenshots to other location
-mkdir -p $SCREENSHOTS_FOLDER
-defaults write com.apple.screencapture location -string "${SCREENSHOTS_FOLDER}"
+mkdir -p "$SCREENSHOTS_FOLDER"
+defaults write com.apple.screencapture location -string "$SCREENSHOTS_FOLDER"
 # Save screenshots in PNG format
 defaults write com.apple.screencapture type -string "png"
 # Disable shadow in screenshots
@@ -222,8 +222,8 @@ defaults write com.apple.screencapture disable-shadow -bool "true"
 ###############################################################################
 
 # Set screenshot location
-mkdir -p $SCREENSHOTS_FOLDER
-defaults write com.apple.iphonesimulator "ScreenShotSaveLocation" -string "${SCREENSHOTS_FOLDER}"
+mkdir -p "$SCREENSHOTS_FOLDER"
+defaults write com.apple.iphonesimulator "ScreenShotSaveLocation" -string "$SCREENSHOTS_FOLDER"
 
 
 ###############################################################################
@@ -265,5 +265,5 @@ defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool "true"
 defaults write com.apple.CrashReporter DialogType -string "none"
 
 for app in "Calendar" "Contacts" "Dock" "Finder" "Mail" "Safari" "SystemUIServer" "iCal"; do
-    killall "${app}" &> /dev/null
+    killall "$app" &> /dev/null
 done

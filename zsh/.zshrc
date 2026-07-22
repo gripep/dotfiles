@@ -37,6 +37,8 @@ source $ZSH_DIR/.history.zsh
 # Source the system dotfiles for alias, path, and other config
 DOTFILES_DIR="$HOME/.dotfiles"
 
-for DOTFILE in "$DOTFILES_DIR"/system/.{env,path,langs,cli-tools,functions,alias,custom}; do
+# Note: .env is intentionally not sourced here so secrets (e.g. GITHUB_TOKEN)
+# are not loaded into every interactive shell. Use `loadenv` when needed.
+for DOTFILE in "$DOTFILES_DIR"/system/.{path,langs,cli-tools,functions,alias,custom}; do
     [ -f "$DOTFILE" ] && source "$DOTFILE"
 done

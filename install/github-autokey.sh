@@ -17,7 +17,7 @@
 #   - https://gist.github.com/petersellars/c6fff3657d53d053a15e57862fc6f567
 #   - https://nathanielhoag.com/blog/2014/05/26/automate-ssh-key-generation-and-deployment/
 
-set -eu -o pipefail
+# Sourced by install.sh, which already runs under `set -eu -o pipefail`.
 
 # Source .env file
 source "${DOTFILES_DIR}/system/.env"

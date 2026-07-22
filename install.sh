@@ -21,6 +21,7 @@ fi
 if [ ! -f "$DOTFILES_DIR/system/.env" ]; then
     echo "Missing $DOTFILES_DIR/system/.env"
     echo "Copy system/.env.example to system/.env, fill it in, then re-run."
+    echo "Make sure to read $DOTFILES_DIR/README.md"
     exit 1
 fi
 

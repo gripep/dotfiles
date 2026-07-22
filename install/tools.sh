@@ -6,7 +6,7 @@
 
 install_gemini_cli() {
     # gemini-cli (Google Gemini AI models cli tool)
-    if command -v gemini &> /dev/null; then
+    if is-executable gemini; then
         return
     fi
     echo "gemini-cli not found. Installing..."

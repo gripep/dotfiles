@@ -5,6 +5,29 @@
 # Settings are set using the `defaults` command
 # https://macos-defaults.com
 
+# Machine config lives in .env, which .zshrc does not load into interactive
+# shells. Source it here so this script is self-contained.
+if [ ! -f "$DOTFILES_DIR/system/.env" ]; then
+    echo "Missing $DOTFILES_DIR/system/.env"
+    echo "Copy system/.env.example to system/.env and fill it in first."
+    exit 1
+fi
+. "$DOTFILES_DIR/system/.env"
+
+# Validate the values this script relies on before applying its settings
+if [ -z "${MY_NAME:-}" ]; then
+    echo "MY_NAME is not set in .env. Set it before applying macOS defaults."
+    exit 1
+fi
+if [ "${IS_WORK_MACHINE:-}" != "true" ] && [ "${IS_WORK_MACHINE:-}" != "false" ]; then
+    echo "IS_WORK_MACHINE must be 'true' or 'false' in .env (got '${IS_WORK_MACHINE:-}')."
+    exit 1
+fi
+if [ "$IS_WORK_MACHINE" = true ] && [ -z "${WORK_COMPANY_NAME:-}" ]; then
+    echo "WORK_COMPANY_NAME must be set in .env when IS_WORK_MACHINE=true."
+    exit 1
+fi
+
 # Computer name
 if [ "$IS_WORK_MACHINE" = false ]; then
     COMPUTER_NAME="${MY_NAME}'s MacBook"
@@ -64,7 +87,7 @@ sudo systemsetup -setusingnetworktime on
 # Set locale to UK (this will also set date and number formats)
 defaults write NSGlobalDomain AppleLocale -string "$LOCALE"
 # Set preferred languages
-defaults write NSGlobalDomain AppleLanguages -array ${PREFERRED_LANGUAGES[@]}
+defaults write NSGlobalDomain AppleLanguages -array "${PREFERRED_LANGUAGES[@]}"
 # Set temperature unit to Celsius (°C)
 defaults write NSGlobalDomain AppleTemperatureUnit -string "Celsius"
 # Set measurement system to Metric
@@ -209,8 +232,8 @@ defaults write com.apple.finder "ShowHardDrivesOnDesktop" -bool "true"
 ###############################################################################
 
 # Set option to save screenshots to other location
-mkdir -p $SCREENSHOTS_FOLDER
-defaults write com.apple.screencapture location -string "${SCREENSHOTS_FOLDER}"
+mkdir -p "$SCREENSHOTS_FOLDER"
+defaults write com.apple.screencapture location -string "$SCREENSHOTS_FOLDER"
 # Save screenshots in PNG format
 defaults write com.apple.screencapture type -string "png"
 # Disable shadow in screenshots
@@ -222,8 +245,8 @@ defaults write com.apple.screencapture disable-shadow -bool "true"
 ###############################################################################
 
 # Set screenshot location
-mkdir -p $SCREENSHOTS_FOLDER
-defaults write com.apple.iphonesimulator "ScreenShotSaveLocation" -string "${SCREENSHOTS_FOLDER}"
+mkdir -p "$SCREENSHOTS_FOLDER"
+defaults write com.apple.iphonesimulator "ScreenShotSaveLocation" -string "$SCREENSHOTS_FOLDER"
 
 
 ###############################################################################
@@ -265,5 +288,5 @@ defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool "true"
 defaults write com.apple.CrashReporter DialogType -string "none"
 
 for app in "Calendar" "Contacts" "Dock" "Finder" "Mail" "Safari" "SystemUIServer" "iCal"; do
-    killall "${app}" &> /dev/null
+    killall "$app" &> /dev/null
 done

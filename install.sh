@@ -37,8 +37,8 @@ if is-macos; then
 
     # Set up development directories
     echo "Creating base directories for development..."
-    mkdir -p $HOME/.config
-    mkdir -p $HOME/Developer/{bin,opt,src,tmp}
+    mkdir -p "$HOME/.config"
+    mkdir -p "$HOME"/Developer/{bin,opt,src,tmp}
 else
     echo "Currently only macOS is supported. Exiting..."
     exit

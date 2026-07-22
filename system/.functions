@@ -39,7 +39,10 @@ git-branch-cleanup() {
     echo "$branches"
     printf "Continue? [y/N] "
     read -r reply
-    [ "$reply" = "y" ] || [ "$reply" = "Y" ] || { echo "Aborted."; return 1; }
+    case "$reply" in
+        y | Y) ;;
+        *) echo "Aborted."; return 1 ;;
+    esac
 
     # -d refuses to delete branches with unmerged work
     echo "$branches" | xargs -n1 git branch -d

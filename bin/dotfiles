@@ -2,8 +2,13 @@
 
 # This script provides a dotfiles CLI to manage your dotfiles
 
+# Best-effort orchestrator: -u catches variable typos, but -e is intentionally
+# omitted so a single failing step (e.g. a macOS default that no longer exists)
+# does not abort the rest of the command.
+set -u
+
 BIN_NAME=$(basename "$0")
-COMMAND_NAME="$1"
+COMMAND_NAME="${1:-}"
 
 DOTFILES_DIR="$HOME/.dotfiles"
 DOTFILES_IDE="code"
@@ -65,8 +70,8 @@ sub_macos() {
     echo "Updating dock..."
     . "$DOTFILES_DIR/macos/dock.sh"
 
-    for DEFAULTS_FILE in "${DOTFILES_DIR}"/macos/defaults*.sh; do
-        echo "Applying ${DEFAULTS_FILE}" && . "${DEFAULTS_FILE}"
+    for DEFAULTS_FILE in "$DOTFILES_DIR"/macos/defaults*.sh; do
+        echo "Applying $DEFAULTS_FILE" && . "$DEFAULTS_FILE"
     done
 }
 
@@ -81,7 +86,6 @@ case $COMMAND_NAME in
     if declare -f "sub_${COMMAND_NAME}" > /dev/null; then
         "sub_${COMMAND_NAME}" "$@"
     else
-        shift
         echo "'$COMMAND_NAME' is not a known command." >&2
         sub_help
         exit 1

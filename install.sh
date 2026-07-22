@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Run everything in a subshell so that `source`-ing this script (as the README
+# instructs) cannot leak `set -e`/`exit` into, and kill, the caller's shell.
+(
 set -eu -o pipefail
 
 # Get current dotfiles dir to run this script from anywhere
@@ -7,6 +10,20 @@ export DOTFILES_DIR="$HOME/.dotfiles"
 
 # Make dotfiles commands and executable files available
 PATH="$DOTFILES_DIR/bin:$PATH"
+
+# This setup targets Apple Silicon (arm64) only
+if ! is-arm64; then
+    echo "This setup targets Apple Silicon (arm64) Macs only. Detected $(uname -m). Exiting..."
+    exit 1
+fi
+
+# The .env file is required for the GitHub SSH setup below
+if [ ! -f "$DOTFILES_DIR/system/.env" ]; then
+    echo "Missing $DOTFILES_DIR/system/.env"
+    echo "Copy system/.env.example to system/.env, fill it in, then re-run."
+    echo "Make sure to read $DOTFILES_DIR/README.md"
+    exit 1
+fi
 
 # Make dotfiles up-to-date first if available (pull latest changes if git is available)
 if is-executable git && [ -d "$DOTFILES_DIR/.git" ]; then
@@ -53,3 +70,4 @@ ln -sfv "$DOTFILES_DIR/zsh/.p10k.zsh" "$HOME/.config/zsh/.p10k.zsh"
 
 # Install projects
 . "$DOTFILES_DIR/install/projects.sh"
+)
